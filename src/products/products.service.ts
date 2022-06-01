@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(
+    @InjectRepository(Product) 
+    private productRepository: Repository<Product>
+  ){}
+
+  async create(createProductDto: CreateProductDto): Promise<Product> {
+    return await this.productRepository.save(createProductDto);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(): Promise<Product[]> {
+    return await this.productRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number): Promise<Product> {
+    const productExist = await this.productRepository.findOne({ where: { id } });
+    if (!productExist) throw new NotFoundException('Este producto no existe');
+    return productExist;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: Partial<UpdateProductDto>) {
+    const productExist = await this.productRepository.findOne({ where: { id } });
+
+    if (!productExist) throw new NotFoundException('Este post no existe');
+    const updatedProduct = Object.assign(productExist, updateProductDto);
+
+    return await this.productRepository.save(updatedProduct);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
-  }
+
+  async remove(id: number): Promise<void> {
+    const productExist = await this.productRepository.findOne({ where: { id } });
+    if (!productExist) throw new NotFoundException('Este producto no existe');
+
+    await this.productRepository.delete(id);
+  }  
+
 }
