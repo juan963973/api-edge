@@ -35,12 +35,11 @@ export class ProductsService {
     return await this.productRepository.save(updatedProduct);
   }
 
-
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<any> {
     const productExist = await this.productRepository.findOne({ where: { id } });
     if (!productExist) throw new NotFoundException('Este producto no existe');
 
-    await this.productRepository.delete(id);
+    return await this.productRepository.delete(id);
   }  
 
 }
