@@ -1,10 +1,12 @@
 ## Descripción
 API con autenticación de usuarios y creación de productos.
 * Usando los Verbos: 
-- POST para crear productos.
-- GET para listar productos.
-- PATCH para actualizar productos.
-- DELETE para eliminar productos.
+```
+ POST para crear productos.
+ GET para listar productos.
+ PATCH para actualizar productos.
+ DELETE para eliminar productos.
+```
 * Excepciones controladas.
 * Uso de Http status.
 * Guards para protecciones de endpoints.
