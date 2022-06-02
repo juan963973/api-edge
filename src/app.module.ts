@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,8 +14,7 @@ import { UsersModule } from './users/users.module';
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true
     }),
-    AuthModule,
-    UsersModule
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

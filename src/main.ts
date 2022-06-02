@@ -10,8 +10,8 @@ async function bootstrap() {
   .setTitle('API EDGE')
   .setDescription('API de productos')
   .setVersion('1.0')
-  .addTag('products')
   .addTag('auth')
+  .addTag('products')
   .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);
