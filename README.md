@@ -13,13 +13,15 @@ API con autenticación de usuarios y creación de productos.
 
 ## Instalación
 
-Clonar 
+Clonar el proyecto
 
 ```
 https://github.com/juan963973/api-edge
 ```
 
+Instalar modulos de node
 ```bash
+$ cd api-edge
 $ npm install
 ```
 
