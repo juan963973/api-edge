@@ -29,7 +29,7 @@ export class ProductsService {
   async update(id: number, updateProductDto: Partial<UpdateProductDto>) {
     const productExist = await this.productRepository.findOne({ where: { id } });
 
-    if (!productExist) throw new NotFoundException('Este post no existe');
+    if (!productExist) throw new NotFoundException('Este producto no existe');
     const updatedProduct = Object.assign(productExist, updateProductDto);
 
     return await this.productRepository.save(updatedProduct);
